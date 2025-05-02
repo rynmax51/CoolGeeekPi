@@ -1,0 +1,17 @@
+#!/bin/bash
+
+SERVICE_NAME="coolgeeekpi.service"
+SCRIPT_PATH="/opt/coolgeeekpi/fan_control.py"
+
+echo "Stopping background $SERVICE_NAME..."
+sudo systemctl stop "$SERVICE_NAME"
+
+echo "Killing any old fan_control.py processes..."
+sudo pkill -f "$SCRIPT_PATH" || true
+
+echo "Running fan_control.py interactively..."
+python3 "$SCRIPT_PATH"
+
+echo "Restarting $SERVICE_NAME..."
+sudo systemctl start "$SERVICE_NAME"
+echo "Fan control service resumed."

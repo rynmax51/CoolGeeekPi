@@ -1,0 +1,15 @@
+[Unit]
+Description=Raspberry Pi Fan Control Service
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/coolgeeekpi/fan_control.py
+WorkingDirectory=/opt/coolgeeekpi
+Restart=always
+User=pi
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
